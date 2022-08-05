@@ -2,10 +2,14 @@
   "name": "bot-ferias-unioeste",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "scripts": {
-    "start": "yarn tsnd src/app.ts",
+    "dev": "yarn tsnd src/app.ts",
+    "start": "node dist/app.js",
+    "postinstall": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "engines": { "node": "14.18.0" },
   "keywords": [],
   "author": "Enzo Bonfante",
   "license": "ISC",
