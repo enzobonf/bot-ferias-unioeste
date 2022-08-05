@@ -7,17 +7,18 @@ const inicioFerias = new Date(DATA_FERIAS);
 inicioFerias.setUTCHours(3,0,0,0);
 
 console.log('Bot iniciado com sucesso!');
+console.log('teste');
+
+const twitterClient = new TwitterApi({
+    appKey: APP_KEY,
+    appSecret: APP_SECRET,
+    accessToken: ACCESS_TOKEN,
+    accessSecret: ACCESS_SECRET,
+});
 
 async function executaTweet(){
 
     try{
-
-        const twitterClient = new TwitterApi({
-            appKey: APP_KEY,
-            appSecret: APP_SECRET,
-            accessToken: ACCESS_TOKEN,
-            accessSecret: ACCESS_SECRET,
-        });
 
         const dataAgora = new Date();
         dataAgora.setUTCHours(3,0,0,0);
@@ -40,7 +41,7 @@ async function executaTweet(){
         }
 
         console.log(tweetStr);
-        console.log(inicioFerias, dataAgora);
+        //console.log(inicioFerias, dataAgora);
 
         await twitterClient.v1.tweet(tweetStr);
         console.log('Tweet postado', new Date());
@@ -51,8 +52,11 @@ async function executaTweet(){
     }
 }
 
-cron.schedule('0 0 9 * * *', async () => {
+const task = cron.schedule('0 0 9 * * *', async () => {
+    console.log('Executando tarefa');
     await executaTweet();
 }, {
     timezone: 'America/Sao_Paulo'
 });
+
+task.start();
