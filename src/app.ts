@@ -6,6 +6,8 @@ const { APP_KEY, APP_SECRET, ACCESS_TOKEN, ACCESS_SECRET, DATA_FERIAS } = proces
 const inicioFerias = new Date(DATA_FERIAS);
 inicioFerias.setUTCHours(3,0,0,0);
 
+console.log('Bot iniciado com sucesso!');
+
 async function executaTweet(){
 
     try{
@@ -20,23 +22,28 @@ async function executaTweet(){
         const dataAgora = new Date();
         dataAgora.setHours(0,0,0,0);
 
-        const diasAteFerias =
-				(inicioFerias.valueOf() -
-					dataAgora.valueOf()) /
-				(1000 * 60 * 60 * 24); // fator de conversão ms -> dia
-        
-        const sufixos = {
-            m: diasAteFerias > 1 ? 'm' : '',
-            s: diasAteFerias > 1 ? 's' : '',
-        }
+        const diasAteFerias = 
+            (inicioFerias.valueOf() -
+                dataAgora.valueOf()) /
+            (1000 * 60 * 60 * 24); // fator de conversão ms -> dia
+
+        const sufixos = diasAteFerias > 1 ? { m: 'm', s: 's' } : { m: '', s: '' };
 
         let tweetStr = `Falta${sufixos['m']} ${diasAteFerias} dia${sufixos['s']} para as férias da UNIOESTE`;
 
+        if(diasAteFerias === 0){
+            tweetStr = 'BOAS FÉRIAS';
+        }
+        else if(diasAteFerias < 0){
+            console.log('Periodo de férias, nada foi executado');
+            return;
+        }
+
+        console.log(tweetStr);
+
         await twitterClient.v1.tweet(tweetStr);
         console.log('Tweet postado', new Date());
-        
-
-        
+    
     }
     catch(error){
         console.log(error);
