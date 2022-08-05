@@ -8,6 +8,8 @@ inicioFerias.setUTCHours(3,0,0,0);
 
 console.log('Bot iniciado com sucesso!');
 
+executaTweet();
+
 async function executaTweet(){
 
     try{
@@ -40,9 +42,10 @@ async function executaTweet(){
         }
 
         console.log(tweetStr);
+        console.log(inicioFerias, dataAgora);
 
-        await twitterClient.v1.tweet(tweetStr);
-        console.log('Tweet postado', new Date());
+        /* await twitterClient.v1.tweet(tweetStr);
+        console.log('Tweet postado', new Date()); */
     
     }
     catch(error){
