@@ -1,5 +1,5 @@
 import 'dotenv/config';
-import { TwitterApi, UserTimelineV1Paginator} from 'twitter-api-v2';
+import { TwitterApi } from 'twitter-api-v2';
 import * as cron from 'node-cron';
 
 const { APP_KEY, APP_SECRET, ACCESS_TOKEN, ACCESS_SECRET, DATA_FERIAS } = process.env;
