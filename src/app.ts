@@ -22,12 +22,12 @@ async function executaTweet(){
         });
 
         const dataAgora = new Date();
-        dataAgora.setHours(0,0,0,0);
+        dataAgora.setUTCHours(3,0,0,0);
 
         const diasAteFerias = 
-            (inicioFerias.valueOf() -
+            Math.trunc((inicioFerias.valueOf() -
                 dataAgora.valueOf()) /
-            (1000 * 60 * 60 * 24); // fator de conversão ms -> dia
+            (1000 * 60 * 60 * 24)); // fator de conversão ms -> dia
 
         const sufixos = diasAteFerias > 1 ? { m: 'm', s: 's' } : { m: '', s: '' };
 
