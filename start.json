@@ -1,0 +1,9 @@
+{
+    "apps": [
+        {
+            "name": "Bot Férias UNIOESTE",
+            "script": "npm",
+            "args" : "start"
+        }
+    ]
+}
