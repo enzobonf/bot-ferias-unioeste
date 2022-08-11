@@ -35,6 +35,9 @@ async function executaTweet(){
         if(diasAteFerias === 0){
             tweetStr = 'BOAS FÉRIAS';
         }
+        else if(diasAteFerias <= 2){
+            tweetStr += '!!!'
+        }
         else if(diasAteFerias < 0){
             console.log('Periodo de férias, nada foi executado');
             return;
