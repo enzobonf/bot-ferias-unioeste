@@ -32,19 +32,19 @@ async function executaTweet(){
 
         let tweetStr = `Falta${sufixos['m']} ${diasAteFerias} dia${sufixos['s']} para as férias da UNIOESTE`;
 
+        if(diasAteFerias < 0){
+            console.log('Periodo de férias, nada foi executado');
+            return;
+        }
+
         if(diasAteFerias === 0){
             tweetStr = 'BOAS FÉRIAS';
         }
         else if(diasAteFerias <= 2){
             tweetStr += '!!!'
         }
-        else if(diasAteFerias < 0){
-            console.log('Periodo de férias, nada foi executado');
-            return;
-        }
-
+        
         console.log(tweetStr);
-        //console.log(inicioFerias, dataAgora);
 
         await twitterClient.v1.tweet(tweetStr);
         console.log('Tweet postado', new Date());
