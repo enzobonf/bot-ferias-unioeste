@@ -62,4 +62,3 @@ const task = cron.schedule(
 );
 
 task.start();
-executaTweet();
