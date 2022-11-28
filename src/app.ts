@@ -8,7 +8,6 @@ const inicioFerias = new Date(DATA_FERIAS);
 inicioFerias.setUTCHours(3, 0, 0, 0);
 
 console.log("Bot iniciado com sucesso!");
-console.log("teste");
 
 const twitterClient = new TwitterApi({
   appKey: APP_KEY,
