@@ -1,11 +1,11 @@
-name: Post tweet
+name: Postar tweet
 on:
     schedule:
         - cron: '50 22 * * *'
 
 jobs:
     test:
-        name: Post tweet
+        name: Postar tweet
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2
