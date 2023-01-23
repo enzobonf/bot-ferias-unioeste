@@ -1,7 +1,7 @@
 name: Post tweet
 on:
     schedule:
-        - cron: '0 0 17 34 * *'
+        - cron: '0 17 38 * *'
 
 jobs:
     test:
