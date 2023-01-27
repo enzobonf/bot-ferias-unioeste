@@ -1,7 +1,8 @@
 name: Postar tweet
 on:
-    schedule:
-        - cron: '35 18 * * *'
+    push:
+        branches:
+            - main
 
 jobs:
     test:
