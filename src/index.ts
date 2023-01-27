@@ -43,13 +43,6 @@ async function executaTweet() {
             for (let i = 0; i <= 5 - diasAteFerias; i++) tweetStr += '!';
         }
 
-        console.log({
-            APP_KEY,
-            APP_SECRET,
-            ACCESS_TOKEN,
-            ACCESS_SECRET,
-            DATA_FERIAS,
-        });
         console.log(tweetStr);
 
         await twitterClient.v1.tweet('teste');
