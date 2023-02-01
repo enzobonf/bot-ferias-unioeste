@@ -45,7 +45,7 @@ async function executaTweet() {
 
         console.log(tweetStr);
 
-        await twitterClient.v1.tweet('teste');
+        await twitterClient.v1.tweet(tweetStr);
         console.log('Tweet postado', new Date());
     } catch (error) {
         console.log(error);
