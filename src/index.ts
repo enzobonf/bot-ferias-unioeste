@@ -57,6 +57,7 @@ const task = cron.schedule(
     async () => {
         console.log('Executando tarefa');
         await executaTweet();
+        process.exit(0);
     },
     {
         timezone: 'America/Sao_Paulo',
