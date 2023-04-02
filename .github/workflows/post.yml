@@ -2,6 +2,7 @@ name: Postar tweet
 on:
     schedule:
         - cron: '45 11 * * *'
+    workflow_dispatch:
 
 jobs:
     test:
@@ -23,4 +24,4 @@ jobs:
                   ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
                   ACCESS_SECRET: ${{ secrets.ACCESS_SECRET }}
                   DATA_FERIAS: ${{ secrets.DATA_FERIAS }}
-              run: yarn dev
+              run: yarn start
