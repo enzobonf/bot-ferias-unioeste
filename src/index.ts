@@ -48,7 +48,8 @@ async function executaTweet() {
         await twitterClient.v1.tweet(tweetStr);
         console.log('Tweet postado', new Date());
     } catch (error) {
-        throw new Error(error);
+        console.log(error);
+        process.exit(1);
     }
 }
 
