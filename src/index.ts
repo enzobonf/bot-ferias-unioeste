@@ -45,7 +45,7 @@ async function executaTweet() {
 
         console.log(tweetStr);
 
-        await twitterClient.v1.tweet(tweetStr);
+        await twitterClient.v2.tweet(tweetStr);
         console.log('Tweet postado', new Date());
     } catch (error) {
         console.log(error);
@@ -66,3 +66,4 @@ const task = cron.schedule(
 );
 
 task.start();
+executaTweet();
