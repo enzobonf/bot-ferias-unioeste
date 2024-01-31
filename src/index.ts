@@ -5,6 +5,8 @@ import * as cron from 'node-cron';
 const { APP_KEY, APP_SECRET, ACCESS_TOKEN, ACCESS_SECRET, DATA_FERIAS } =
     process.env;
 
+console.log({ APP_KEY, APP_SECRET, ACCESS_TOKEN, ACCESS_SECRET, DATA_FERIAS });
+
 const inicioFerias = new Date(DATA_FERIAS);
 inicioFerias.setUTCHours(3, 0, 0, 0);
 
