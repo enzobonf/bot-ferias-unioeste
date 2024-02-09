@@ -3,6 +3,10 @@ on:
     schedule:
         - cron: '45 11 * * *'
     workflow_dispatch:
+        inputs:
+            EXECUTAR_DIRETO:
+                description: 'Opção para executar a função de postar tweet diretamente'
+                required: true
 
 jobs:
     test:
@@ -24,4 +28,5 @@ jobs:
                   ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
                   ACCESS_SECRET: ${{ secrets.ACCESS_SECRET }}
                   DATA_FERIAS: ${{ secrets.DATA_FERIAS }}
+                  EXECUTAR_DIRETO: ${{ github.event.inputs.EXECUTAR_DIRETO }}
               run: yarn start

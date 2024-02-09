@@ -2,8 +2,14 @@ import 'dotenv/config';
 import { TwitterApi } from 'twitter-api-v2';
 import * as cron from 'node-cron';
 
-const { APP_KEY, APP_SECRET, ACCESS_TOKEN, ACCESS_SECRET, DATA_FERIAS } =
-    process.env;
+const {
+    APP_KEY,
+    APP_SECRET,
+    ACCESS_TOKEN,
+    ACCESS_SECRET,
+    DATA_FERIAS,
+    EXECUTAR_DIRETO,
+} = process.env;
 
 const inicioFerias = new Date(DATA_FERIAS);
 inicioFerias.setUTCHours(3, 0, 0, 0);
@@ -65,4 +71,15 @@ const task = cron.schedule(
     },
 );
 
-task.start();
+async function main() {
+    if (EXECUTAR_DIRETO === 'true') {
+        console.log('Executando diretamente');
+        await executaTweet();
+        process.exit(0);
+    } else {
+        console.log('Iniciando agendamento');
+        task.start();
+    }
+}
+
+main();
