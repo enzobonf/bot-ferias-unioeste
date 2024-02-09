@@ -6,7 +6,8 @@ on:
         inputs:
             EXECUTAR_DIRETO:
                 description: 'Executar diretamente?'
-                required: true
+                default: 'true'
+                required: false
 
 jobs:
     test:
