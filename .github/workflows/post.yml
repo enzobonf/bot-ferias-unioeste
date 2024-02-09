@@ -5,7 +5,7 @@ on:
     workflow_dispatch:
         inputs:
             EXECUTAR_DIRETO:
-                description: 'Opção para executar a função de postar tweet diretamente'
+                description: 'Executar diretamente?'
                 required: true
 
 jobs:
