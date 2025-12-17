@@ -8,11 +8,17 @@ const {
     ACCESS_TOKEN,
     ACCESS_SECRET,
     DATA_FERIAS,
+    DATA_RECESSO,
     EXECUTAR_DIRETO,
 } = process.env;
 
 const inicioFerias = new Date(DATA_FERIAS);
 inicioFerias.setUTCHours(3, 0, 0, 0);
+
+const inicioRecesso = DATA_RECESSO ? new Date(DATA_RECESSO) : null;
+if (inicioRecesso) {
+    inicioRecesso.setUTCHours(3, 0, 0, 0);
+}
 
 console.log('Bot iniciado com sucesso!');
 
@@ -28,25 +34,43 @@ async function executaTweet() {
         const dataAgora = new Date();
         dataAgora.setUTCHours(3, 0, 0, 0);
 
-        const diasAteFerias = Math.trunc(
-            (inicioFerias.valueOf() - dataAgora.valueOf()) /
-                (1000 * 60 * 60 * 24),
-        ); // fator de conversão ms -> dia
+        let dataAlvo = inicioFerias;
+        let tipoEvento = 'férias';
+        let mensagemFinal = 'BOAS FÉRIAS';
+        let artigo = 'as';
+
+        if (inicioRecesso) {
+            const diasAteRecesso = Math.trunc(
+                (inicioRecesso.valueOf() - dataAgora.valueOf()) /
+                    (1000 * 60 * 60 * 24),
+            );
+
+            if (diasAteRecesso >= 0) {
+                dataAlvo = inicioRecesso;
+                tipoEvento = 'recesso';
+                mensagemFinal = 'BOM RECESSO';
+                artigo = 'o';
+            }
+        }
+
+        const diasAteEvento = Math.trunc(
+            (dataAlvo.valueOf() - dataAgora.valueOf()) / (1000 * 60 * 60 * 24),
+        );
 
         const sufixos =
-            diasAteFerias > 1 ? { m: 'm', s: 's' } : { m: '', s: '' };
+            diasAteEvento > 1 ? { m: 'm', s: 's' } : { m: '', s: '' };
 
-        let tweetStr = `Falta${sufixos['m']} ${diasAteFerias} dia${sufixos['s']} para as férias da UNIOESTE`;
+        let tweetStr = `Falta${sufixos['m']} ${diasAteEvento} dia${sufixos['s']} para ${artigo} ${tipoEvento} da UNIOESTE`;
 
-        if (diasAteFerias < 0) {
-            console.log('Periodo de férias, nada foi executado');
+        if (diasAteEvento < 0) {
+            console.log(`Periodo de ${tipoEvento}, nada foi executado`);
             return;
         }
 
-        if (diasAteFerias === 0) {
-            tweetStr = 'BOAS FÉRIAS';
-        } else if (diasAteFerias < 5) {
-            for (let i = 0; i <= 5 - diasAteFerias; i++) tweetStr += '!';
+        if (diasAteEvento === 0) {
+            tweetStr = mensagemFinal;
+        } else if (diasAteEvento < 5) {
+            for (let i = 0; i <= 5 - diasAteEvento; i++) tweetStr += '!';
         }
 
         console.log(tweetStr);
