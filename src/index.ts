@@ -12,11 +12,21 @@ const {
     EXECUTAR_DIRETO,
 } = process.env;
 
+if (!DATA_FERIAS) {
+    throw new Error('DATA_FERIAS environment variable is required');
+}
+
 const inicioFerias = new Date(DATA_FERIAS);
+if (isNaN(inicioFerias.getTime())) {
+    throw new Error('DATA_FERIAS must be a valid date');
+}
 inicioFerias.setUTCHours(3, 0, 0, 0);
 
 const inicioRecesso = DATA_RECESSO ? new Date(DATA_RECESSO) : null;
 if (inicioRecesso) {
+    if (isNaN(inicioRecesso.getTime())) {
+        throw new Error('DATA_RECESSO must be a valid date');
+    }
     inicioRecesso.setUTCHours(3, 0, 0, 0);
 }
 
