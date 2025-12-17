@@ -29,5 +29,6 @@ jobs:
                   ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
                   ACCESS_SECRET: ${{ secrets.ACCESS_SECRET }}
                   DATA_FERIAS: ${{ secrets.DATA_FERIAS }}
+                  DATA_RECESSO: ${{ secrets.DATA_RECESSO }}
                   EXECUTAR_DIRETO: ${{ github.event.inputs.EXECUTAR_DIRETO }}
               run: yarn start
