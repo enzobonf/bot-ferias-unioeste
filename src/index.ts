@@ -44,6 +44,12 @@ async function executaTweet() {
         const dataAgora = new Date();
         dataAgora.setUTCHours(3, 0, 0, 0);
 
+        console.log(`[DEBUG] Data atual: ${dataAgora.toISOString()}`);
+        console.log(`[DEBUG] Data de férias: ${inicioFerias.toISOString()}`);
+        if (inicioRecesso) {
+            console.log(`[DEBUG] Data de recesso: ${inicioRecesso.toISOString()}`);
+        }
+
         let dataAlvo = inicioFerias;
         let tipoEvento = 'férias';
         let mensagemFinal = 'BOAS FÉRIAS';
@@ -55,12 +61,22 @@ async function executaTweet() {
                     (1000 * 60 * 60 * 24),
             );
 
-            if (diasAteRecesso >= 0) {
+            const recessoAntesDasFerias = inicioRecesso.valueOf() < inicioFerias.valueOf();
+
+            console.log(`[DEBUG] Dias até recesso: ${diasAteRecesso}`);
+            console.log(`[DEBUG] Recesso antes das férias: ${recessoAntesDasFerias}`);
+
+            if (diasAteRecesso >= 0 && recessoAntesDasFerias) {
                 dataAlvo = inicioRecesso;
                 tipoEvento = 'recesso';
                 mensagemFinal = 'BOM RECESSO';
                 artigo = 'o';
+                console.log(`[DEBUG] Selecionado: recesso (recesso ainda não passou e é antes das férias)`);
+            } else {
+                console.log(`[DEBUG] Selecionado: férias (recesso já passou ou férias vêm primeiro)`);
             }
+        } else {
+            console.log(`[DEBUG] Selecionado: férias (sem data de recesso configurada)`);
         }
 
         const diasAteEvento = Math.trunc(
